@@ -1,6 +1,7 @@
 from functions.get_files_info import get_files_info 
 from functions.get_file_content import get_file_content
 from functions.write_file import write_file
+from functions.run_python_file import run_python_file
 
 def check_current_dir():
   res = "Result for current directory:\n"
@@ -31,9 +32,18 @@ def test_read_file_content(working_dir, file_path):
 def test_write_file(working_dir, file_path, content):
   print(write_file(working_dir, file_path, content))
 
-test_write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
-test_write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")
-test_write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
+def test_run_python_file(working_dir, file, args=[]):
+  print(run_python_file(working_dir, file, args))
+
+test_run_python_file("calculator", "main.py")
+test_run_python_file("calculator", "main.py", ["3 + 5"])
+test_run_python_file("calculator", "tests.py")
+test_run_python_file("calculator", "../main.py")
+test_run_python_file("calculator", "nonexistent.py")
+
+#test_write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
+#test_write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")
+#test_write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
 
 #test_read_file_content("calculator", "main.py")
 #test_read_file_content("calculator", "pkg/calculator.py")
